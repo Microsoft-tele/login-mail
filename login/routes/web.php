@@ -13,6 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/',[\App\Http\Controllers\LoginController::class, 'index']); // 获取用户输入的邮箱和密码
+
+Route::post('receive', [\App\Http\Controllers\LoginController::class, 'receive']);  // 接收邮箱和密码并验证
+
+Route::post('checkVerifyNum', [\App\Http\Controllers\LoginController::class, 'checkVerifyNum']);
+
+Route::any('updatePassword', function (){
+    return view('updatePassword');
 });
+
+Route::any('checkPassword', [\App\Http\Controllers\UpdatePasswodrController::class, 'receive']);
+
+Route::any('checkVerifyNum_updatePassword',
+    [\App\Http\Controllers\UpdatePasswodrController::class, 'checkVerifyNum_updatePassword']);
+
+Route::get('mysql', [\App\Http\Controllers\LoginController::class, 'mysql']);
+
