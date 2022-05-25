@@ -49,7 +49,8 @@ class UpdatePasswodrController extends Controller
             echo '要修改的邮箱:'.$res[1].'<br>';
             echo '请确认您的新密码:'.$res[2].'<br>';
             // 在这里调用md5算法进行加密
-            $this->mysql($res[1], $res[2]);
+            $md5_password = md5($res[2]);
+            $this->mysql($res[1], $md5_password);
         }else{
             echo '您输入的验证码有误，请重新输入！'.'<br>';
         }

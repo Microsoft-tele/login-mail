@@ -42,7 +42,9 @@ class LoginController extends Controller
 
             // 在这里调用md5
 
-            if($request->password == $res[0]['password']){
+            $md5_password = md5($request->password);
+
+            if($md5_password == $res[0]['password']){
                 echo '匹配成功';
                 return view('login');
             }else{
@@ -87,7 +89,8 @@ class LoginController extends Controller
             echo '请确认您的邮箱:'.$res[1].'<br>';
             echo '请确认您的密码:'.$res[2].'<br>';
             // 在这里调用md5算法进行加密
-            $this->mysql($res[1], $res[2]);
+            $md5_password = md5($res[2]);
+            $this->mysql($res[1], $md5_password);
         }else{
             echo '您输入的验证码有误，请重新输入！'.'<br>';
         }
